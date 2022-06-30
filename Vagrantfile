@@ -5,14 +5,14 @@ VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure("2") do |config|
   #
-  config.vm.box = "geerlingguy/rockylinux8"
+  config.vm.box = "centos/8"
 
   config.ssh.insert_key = false
 
   config.vm.synced_folder ".", "/vagrant", disabled: true
 
   config.vm.provider:virtualbox do |v|
-    v.memory = 256
+    v.memory = 512
     v.linked_clone = true
   end
 

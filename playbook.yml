@@ -1,6 +1,7 @@
 ---
-- name: install apache in all app servers.
+- name: install apache in all app servers
   hosts: app
   become: true
   roles:
+    - yum_config
     - apache

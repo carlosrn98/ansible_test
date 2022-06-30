@@ -1,6 +1,6 @@
 ---
 - name: Install httpd.
-  yum:
+  dnf:
     name: httpd
     state: latest
 - name: httpd enabled and running
