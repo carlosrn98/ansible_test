@@ -19,6 +19,12 @@ Vagrant.configure("2") do |config|
   config.vm.define "app1" do |app|
     app.vm.hostname = "app1.test"
     app.vm.network:private_network, ip: "192.168.60.4"
+    app.vm.provision "shell" do |s|
+        ssh_pub_key = File.readlines("#{Dir.home}/.ssh/id_rsa.pub").first.strip
+        s.inline = <<-SHELL
+          echo #{ssh_pub_key} >> /home/vagrant/.ssh/authorized_keys
+        SHELL
+    end
     app.vm.provision "ansible" do |ansible|
         ansible.playbook = "app_playbook.yml"
         ansible.inventory_path = "inventory.ini"
@@ -29,6 +35,12 @@ Vagrant.configure("2") do |config|
   config.vm.define "db" do |db|
     db.vm.hostname = "db.test"
     db.vm.network:private_network, ip: "192.168.60.6"
+    db.vm.provision "shell" do |s|
+        ssh_pub_key = File.readlines("#{Dir.home}/.ssh/id_rsa.pub").first.strip
+        s.inline = <<-SHELL
+          echo #{ssh_pub_key} >> /home/vagrant/.ssh/authorized_keys
+        SHELL
+    end
     db.vm.provision "ansible" do |ansible|
         ansible.playbook = "db_playbook.yml"
         ansible.inventory_path = "inventory.ini"
