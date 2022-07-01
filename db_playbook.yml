@@ -1,0 +1,7 @@
+---
+- name: Install Postges on the db server
+  hosts: db
+  become: true
+  roles:
+    - yum_config
+    - database

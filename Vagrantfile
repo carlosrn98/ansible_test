@@ -19,16 +19,21 @@ Vagrant.configure("2") do |config|
   config.vm.define "app1" do |app|
     app.vm.hostname = "app1.test"
     app.vm.network:private_network, ip: "192.168.60.4"
-  end
-
-  config.vm.define "app2" do |app|
-    app.vm.hostname = "app2.test"
-    app.vm.network:private_network, ip: "192.168.60.5"
+    app.vm.provision "ansible" do |ansible|
+        ansible.playbook = "app_playbook.yml"
+        ansible.inventory_path = "inventory.ini"
+        ansible.limit = "app"
+    end
   end
 
   config.vm.define "db" do |db|
     db.vm.hostname = "db.test"
     db.vm.network:private_network, ip: "192.168.60.6"
+    db.vm.provision "ansible" do |ansible|
+        ansible.playbook = "db_playbook.yml"
+        ansible.inventory_path = "inventory.ini"
+        ansible.limit = "db"
+    end
   end
 
 end

@@ -1,0 +1,5 @@
+---
+- name: Create db
+  postgresql_db:
+    state: present
+    name: "{{ db_name }}"

@@ -1,0 +1,6 @@
+---
+- name: creates test file
+  template:
+    src: test.j2
+    dest: /home/vagrant/test
+    mode: 644

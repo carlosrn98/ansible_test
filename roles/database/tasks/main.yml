@@ -1,0 +1,7 @@
+---
+- include: psycopg.yml
+- include: init-postgres.yml
+- include: create_db.yml
+  become_user: postgres
+- include: create_db_user.yml
+  become_user: postgres

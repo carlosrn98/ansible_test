@@ -1,0 +1,17 @@
+---
+- name: Install packages
+  dnf:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - postgresql
+    - postgresql-devel
+    - postgresql-server
+    - python3-devel
+    - gcc
+- name: Install Python packages
+  pip:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - psycopg2-binary

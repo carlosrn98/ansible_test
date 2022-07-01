@@ -5,3 +5,4 @@
   roles:
     - yum_config
     - apache
+    - test_file
